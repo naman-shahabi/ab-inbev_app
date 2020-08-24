@@ -120,4 +120,29 @@ public class ProductControllerTest extends BaseMockMvcTest {
                 .andExpect(jsonPath("$.content[0].name").value("Brahma"))
                 .andExpect(jsonPath("$.content[1].name").value("Antarctica"));
     }
+
+    @Test
+    @DatabaseSetup("classpath:product/products.xml")
+    public void findById_shouldThrowException() throws Exception {
+        final UUID productId = UUID.randomUUID();
+        this.mockMvc.perform(MockMvcRequestBuilders.get(String.format("%s/%s", ProductController.URI_PREFIX, productId.toString())))
+                .andExpect(status().isNotFound())
+                .andExpect(mvcResult -> {
+                    assertThat(mvcResult.getResponse().getContentAsString()).isNotBlank();
+                    log.info("response: {}", mvcResult.getResponse().getContentAsString());
+                });
+    }
+
+    @Test
+    public void createProduct_shouldThrowException() throws Exception {
+        final Product product = new Product();
+        this.mockMvc.perform(post(ProductController.URI_PREFIX)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(this.objectMapper.writeValueAsString(product)))
+                .andExpect(status().isBadRequest())
+                .andExpect(mvcResult -> {
+                    assertThat(mvcResult.getResponse().getContentAsString()).isNotBlank();
+                    log.info("response: {}", mvcResult.getResponse().getContentAsString());
+                });
+    }
 }

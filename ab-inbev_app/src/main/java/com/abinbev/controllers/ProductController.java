@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RequestMapping(value = ProductController.URI_PREFIX)
@@ -26,7 +27,7 @@ public class ProductController {
     @ApiOperation(value = "Creates a new Product")
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void create(@ApiParam(value = "Product definition") @RequestBody final Product product){
+    public void create(@ApiParam(value = "Product definition")@Valid @RequestBody final Product product){
         this.productService.create(product);
     }
 
@@ -40,7 +41,7 @@ public class ProductController {
     @ApiOperation(value = "Updates a Product")
     @ResponseStatus(HttpStatus.OK)
     @PutMapping("/{productId}")
-    public void update(@ApiParam(value="Product Id") @PathVariable("productId") final UUID productId, @ApiParam(value = "Product definition") @RequestBody final Product product){
+    public void update(@ApiParam(value="Product Id") @PathVariable("productId") final UUID productId, @ApiParam(value = "Product definition") @Valid @RequestBody final Product product){
         this.productService.save(productId, product);
     }
 

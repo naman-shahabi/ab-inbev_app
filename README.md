@@ -10,7 +10,7 @@ In this section are presented the steps to install the application using docker-
 
 ### Configuring docker volumes
 1. In the docker-compose.yml file configure the local path to be used as volumes for services: db-postgresql, db-pgadmin and ab-inbev_app.
-2. Give permission to the local path so we avoid having issues related to that. Example on unix:
+2. Give permission to the local path so we avoid having issues related to that. Example on Linux:
 
 ```
 chmod -R 777 <local_volume_path>
@@ -26,7 +26,7 @@ Before starting the application stack make sure the ports listed below are not i
 * 5433 - Postgres server;
 * 8083 - Product Application.
 
-In case you need to change local ports for those service, just open the file **.env** in the **<repository_root_directory>/ab-inbev_stack** and change the below properties:
+In case you need to change local ports, just open the file **.env** in the **<repository_root_directory>/ab-inbev_stack** and change the below properties:
 * POSTGRESQL_HOST_PORT - Defines the host port for Postgres container;
 * PRODUCT_HOST_PORT - Defines the host port for Product Application container;
 * PGADMIN_HOST_PORT - Defines the host port for PgAdmin server.
@@ -43,8 +43,7 @@ docker-compose up -d
 ## Api Documentation
 Use the below URL to access the application api documentation.
 
-[http://localhost:8083/swagger-ui.html]
-(http://localhost:8083/swagger-ui.html)
+http://localhost:8083/swagger-ui.html
 
 Don't forget to change the **port** if you changed it. 
 

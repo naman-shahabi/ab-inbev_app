@@ -1,5 +1,6 @@
 package com.abinbev.controllers;
 
+import com.abinbev.config.swagger.ApiPageable;
 import com.abinbev.model.Product;
 import com.abinbev.services.ProductService;
 import io.swagger.annotations.ApiOperation;
@@ -45,6 +46,7 @@ public class ProductController {
         this.productService.save(productId, product);
     }
 
+    @ApiPageable
     @ApiOperation(value = "Find Products by name containing value")
     @GetMapping("/name/{name}")
     public ResponseEntity<Page<Product>> findByName(@ApiParam(value="Name filter") @PathVariable("name") final String name, @ApiParam(value="Page definition") Pageable pageable){
@@ -57,6 +59,7 @@ public class ProductController {
         return new ResponseEntity<>(this.productService.findById(productId), HttpStatus.OK);
     }
 
+    @ApiPageable
     @ApiOperation(value = "Find all products")
     @GetMapping
     public ResponseEntity<Page<Product>> findAll(@ApiParam(value="Page definition") Pageable pageable){

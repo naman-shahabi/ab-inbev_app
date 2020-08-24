@@ -31,23 +31,23 @@ services:
         depends_on: 
             - db-postgresql          
 
-    # ab-inbev_app:
-    #     container_name: ${PRODUCT_HOST}
-    #     image: rssarto/ab-inbev_app:0.0.1-SNAPSHOT
-    #     ports: 
-    #         - "${PRODUCT_HOST_PORT}:${PRODUCT_CONTAINER_PORT}"
-    #     environment: 
-    #         - "DATABASE_URL=jdbc:postgresql://${POSTGRESQL_HOST}:${POSTGRESQL_CONTAINER_PORT}/gop"
-    #         - "DATABASE_SCHEMA=${PRODUCT_SCHEMA_NAME}"
-    #         - "DATABASE_USERNAME=${POSTGRESQL_USER}"
-    #         - "DATABASE_PASSWORD=${POSTGRESQL_PASSWORD}"
-    #         - "DEBUG=true"
-    #     depends_on: 
-    #         - db-postgresql
-    #     networks:
-    #         - product_network
-    #     volumes:
-    #         - ~/product_stack/log:/var/log
+    ab-inbev_app:
+        container_name: ${PRODUCT_HOST}
+        image: rssarto/ab-inbev_app:0.0.1-SNAPSHOT
+        ports: 
+            - "${PRODUCT_HOST_PORT}:${PRODUCT_CONTAINER_PORT}"
+        environment: 
+            - "DATABASE_URL=jdbc:postgresql://${POSTGRESQL_HOST}:${POSTGRESQL_CONTAINER_PORT}/postgres"
+            - "DATABASE_SCHEMA=${PRODUCT_SCHEMA_NAME}"
+            - "DATABASE_USERNAME=${POSTGRESQL_USER}"
+            - "DATABASE_PASSWORD=${POSTGRESQL_PASSWORD}"
+            - "DEBUG=true"
+        depends_on: 
+            - db-postgresql
+        networks:
+            - product_network
+        volumes:
+            - ~/product_stack/log:/var/log
             
 networks:
     product_network:    

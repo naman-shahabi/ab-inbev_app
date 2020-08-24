@@ -3,19 +3,25 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean install -DskipTests'
+                dir("ab-inbev_app"){
+                    sh 'mvn clean install -DskipTests'
+                }
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                dir("ab-inbev_app"){
+                    sh 'mvn test'
+                }
             }
         }
         stage('Build Image') {
             steps {
-                script {
-                    def pom = readMavenPom file: "pom.xml"
-                    sh "mvn spring-boot:build-image -Dspring-boot.build-image.imageName=rssarto/${pom.artifactId}:${pom.version} -DskipTests"
+                dir("ab-inbev_app"){
+                    script {
+                        def pom = readMavenPom file: "pom.xml"
+                        sh "mvn spring-boot:build-image -Dspring-boot.build-image.imageName=rssarto/${pom.artifactId}:${pom.version} -DskipTests"
+                    }
                 }
             }
         }

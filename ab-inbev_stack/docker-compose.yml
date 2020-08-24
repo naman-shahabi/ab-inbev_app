@@ -1,0 +1,53 @@
+version: "3.0"
+services:
+    db-postgresql:
+        container_name: ${POSTGRESQL_HOST}
+        image: postgres:12.0
+        restart: always
+        environment:
+          - 'POSTGRES_PASSWORD=${POSTGRESQL_PASSWORD}'
+        ports:
+          - ${POSTGRESQL_HOST_PORT}:${POSTGRESQL_CONTAINER_PORT}
+        networks:
+          - product_network
+        volumes:
+          - ~/data/postgres:/var/lib/postgresql/data
+
+    db-pgadmin:
+        container_name: ${PGADMIN_HOST}
+        image: dpage/pgadmin4
+        ports:
+            - "${PGADMIN_HOST_PORT}:${PGADMIN_CONTAINER_PORT}"
+        environment:
+            - 'PGADMIN_DEFAULT_EMAIL=${PGADMIN_USER}'
+            - 'PGADMIN_DEFAULT_PASSWORD=${PGADMIN_PASSWORD}'
+            - 'PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=True'
+            - 'PGADMIN_CONFIG_LOGIN_BANNER="Authorised users only!"'
+            - 'PGADMIN_CONFIG_CONSOLE_LOG_LEVEL=10'
+        networks:
+            - product_network
+        volumes:
+            - ~/data/pgadmin:/var/lib/pgadmin
+        depends_on: 
+            - db-postgresql          
+
+    # ab-inbev_app:
+    #     container_name: ${PRODUCT_HOST}
+    #     image: rssarto/ab-inbev_app:0.0.1-SNAPSHOT
+    #     ports: 
+    #         - "${PRODUCT_HOST_PORT}:${PRODUCT_CONTAINER_PORT}"
+    #     environment: 
+    #         - "DATABASE_URL=jdbc:postgresql://${POSTGRESQL_HOST}:${POSTGRESQL_CONTAINER_PORT}/gop"
+    #         - "DATABASE_SCHEMA=${PRODUCT_SCHEMA_NAME}"
+    #         - "DATABASE_USERNAME=${POSTGRESQL_USER}"
+    #         - "DATABASE_PASSWORD=${POSTGRESQL_PASSWORD}"
+    #         - "DEBUG=true"
+    #     depends_on: 
+    #         - db-postgresql
+    #     networks:
+    #         - product_network
+    #     volumes:
+    #         - ~/product_stack/log:/var/log
+            
+networks:
+    product_network:    

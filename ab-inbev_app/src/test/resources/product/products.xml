@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dataset>
+    <product id="892c40ec-bc7b-497a-bb83-51a499e5baa0" name="Brahma" description="One of the oldest brazilian beers" brand="Brahma Chopp" price="9.76" created_date="2020-05-23 16:57:16"/>
+    <product id="dab08057-c29d-42a5-b087-164a1e260635" name="Antarctica" description="traditional brazilian beer" brand="Antarctica" price="8.44" created_date="2020-05-23 16:57:16"/>
+</dataset>

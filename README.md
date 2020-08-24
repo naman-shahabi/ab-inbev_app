@@ -56,6 +56,14 @@ For demonstration purposes use the credentials below to authenticate as a regula
 
 **password**: password
 
+To authenticate please the **jwt-authentication-controller** item from swagger ui.
+
+Now to use the product apis use the **product-controller** item from swagger ui. Don't forget to fill the Bearer token, otherwise you won't be able to use the APIs. To do that press the lock sign available in any api under **product-controller** and in the opened modal type the value:
+
+```
+Bearer <authentication_token>
+```
+
 
 ## Jenkins File
 Created a Jenkins pipeline for CI to execute the build, test, image build and image deploy to docker-hub.

@@ -24,6 +24,7 @@
 		<hibernate.jpamodelgen.version>5.4.20.Final</hibernate.jpamodelgen.version>
 		<springfox.swagger2.version>2.9.2</springfox.swagger2.version>
 		<springfox.swagger.ui.version>2.9.2</springfox.swagger.ui.version>
+		<jjwt.version>0.9.1</jjwt.version>
 		<java.version>11</java.version>
 	</properties>
 
@@ -118,6 +119,15 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${springfox.swagger.ui.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>${jjwt.version}</version>
 		</dependency>
 	</dependencies>
 

@@ -27,12 +27,14 @@ pipeline {
         }
         stage('Push Image'){
             steps {
-                script {
-                    def pom = readMavenPom file: "pom.xml"
-                    docker.withRegistry('https://index.docker.io/v1/', 'dc3ecd62-cae0-4015-bc8e-03b2fef1f13c') {
-                        def customImage = docker.image("rssarto/${pom.artifactId}:${pom.version}")
-                        customImage.push()
-                        sh "docker rmi rssarto/${pom.artifactId}:${pom.version}"
+                dir("ab-inbev_app"){
+                    script {
+                        def pom = readMavenPom file: "pom.xml"
+                        docker.withRegistry('https://index.docker.io/v1/', 'dc3ecd62-cae0-4015-bc8e-03b2fef1f13c') {
+                            def customImage = docker.image("rssarto/${pom.artifactId}:${pom.version}")
+                            customImage.push()
+                            sh "docker rmi rssarto/${pom.artifactId}:${pom.version}"
+                        }
                     }
                 }
             }
